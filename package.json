@@ -4,7 +4,8 @@
   "description": "Basic electron project",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start:electron": "electron ."
   },
   "keywords": [
     "Electron"
