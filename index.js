@@ -1,10 +1,10 @@
 /** importowanie instanji aplikacji i klasy BrowserWindow umożliwiającej
- *  tworzenie nowego okna programu
+ *  tworzenie nowego okna programu oraz obiektu menu
  */
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Menu } = require("electron");
 
 // ustawia produkcyjną wersję
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'dev'; // 'production';
 
 /**
  * Funkcja tworząca okno programu
@@ -22,6 +22,16 @@ function createWindow() {
    * Tutaj wskazywany jest plik widoku okna
    */
   win.loadFile("index.html");
+
+  /**
+   * Tworzenie menu
+   */
+  const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+
+  /**
+   * Dodanie menu do okna
+   */
+  Menu.setApplicationMenu(mainMenu);
 }
 
 /**
