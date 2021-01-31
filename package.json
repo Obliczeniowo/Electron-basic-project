@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "start:electron": "electron ."
+    "start:electron": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . elecrton-basic-project --overwrite --asar=true --platform=win32 --arch=ia32 --icon=electron-assets/icons/app-electron-icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Electron Tutorial App\"",
+    "package-linux": "electron-packager . elecrton-basic-project --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/app-electron-icon.png --prune=true --out=release-builds"
   },
   "keywords": [
     "Electron"
@@ -13,6 +16,7 @@
   "author": "Krzysztof Zajączkowski",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^11.2.1"
+    "electron": "^11.2.1",
+    "electron-packager": "^15.2.0"
   }
 }
