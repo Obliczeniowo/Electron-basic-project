@@ -1,0 +1,14 @@
+{
+  "name": "elecrton-basic-project",
+  "version": "1.0.0",
+  "description": "Basic electron project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Electron"
+  ],
+  "author": "Krzysztof Zajączkowski",
+  "license": "ISC"
+}
