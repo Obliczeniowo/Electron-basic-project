@@ -6,11 +6,13 @@ const { app, BrowserWindow, Menu } = require("electron");
 // ustawia produkcyjną wersję
 process.env.NODE_ENV = 'dev'; // 'production';
 
+let win
+
 /**
  * Funkcja tworząca okno programu
  */
 function createWindow() {
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
