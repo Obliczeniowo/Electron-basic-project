@@ -93,7 +93,7 @@ if (process.env.NODE_ENV !== 'production') {
               item,
               focusedWindow
             ) {
-              mainWindow.webContents.openDevTools()
+              win.webContents.openDevTools()
             }
           }
         ]
