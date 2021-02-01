@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Hello World!</title>
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
     <script src="./viewscripts/index-view.js"></script>
-</head>
-<body style="background: white;">
+    <style>
+        .command-container {
+            display: flex;
+        }
+        .command-container input {
+            width: calc(100vw - 30px);
+        }
+    </style>
+  </head>
+  <body style="background: white">
     <h1>Hello World!</h1>
     <p>
-        We are using node <script>document.write(process.versions.node)</script>,
-        Chrome <script>document.write(process.versions.chrome)</script>,
-        and Electron <script>document.write(process.versions.electron)</script>.
+      We are using node
+      <script>
+        document.write(process.versions.node);
+      </script>
+      , Chrome
+      <script>
+        document.write(process.versions.chrome);
+      </script>
+      , and Electron
+      <script>
+        document.write(process.versions.electron);
+      </script>
+      .
     </p>
 
-    <div class="buttons">
-        <button id="ok">Ok</button>
+    <div class="command-container">
+      <input type="text" /><button id="ok">Ok</button>
     </div>
-</body>
+  </body>
 </html>
