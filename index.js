@@ -3,8 +3,10 @@
  */
 const { app, BrowserWindow, Menu } = require("electron");
 
+const { Messages } = require("./electronscripts/messages");
+
 // ustawia produkcyjną wersję
-process.env.NODE_ENV = 'dev'; // 'production';
+process.env.NODE_ENV = "dev"; // 'production';
 
 let win
 
@@ -24,6 +26,8 @@ function createWindow() {
    * Tutaj wskazywany jest plik widoku okna
    */
   win.loadFile("index.html");
+
+  Messages.initMessages(win);
 
   /**
    * Tworzenie menu
@@ -83,23 +87,17 @@ if (process.platform === "darwin") {
 
 // dodaj narzędzia deweloperskie, jeżeli nie jesteś w trybie deweloperskim
 
-if (process.env.NODE_ENV !== 'production') {
-    mainMenuTemplate.push(
+if (process.env.NODE_ENV !== "production") {
+  mainMenuTemplate.push({
+    label: "Developer tools",
+    submenu: [
       {
-        label: 'Developer tools',
-        submenu: [
-          {
-            label: 'Toogle dev tools',
-            accelerator: process.platform === "darwin" ? "Command+I" : "Ctrl+I",
-            click(
-              item,
-              focusedWindow
-            ) {
-              win.webContents.openDevTools()
-            }
-          }
-        ]
-      }
-    )
-  }
-  
+        label: "Toogle dev tools",
+        accelerator: process.platform === "darwin" ? "Command+I" : "Ctrl+I",
+        click(item, focusedWindow) {
+          win.webContents.openDevTools();
+        },
+      },
+    ],
+  });
+}
