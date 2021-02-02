@@ -5,18 +5,22 @@ const { app, BrowserWindow, Menu } = require("electron");
 
 const { Messages } = require("./electronscripts/messages");
 
+const { InitializeApp } = require("./electronscripts/initialize");
+
 // ustawia produkcyjną wersję
 process.env.NODE_ENV = "dev"; // 'production';
 
 let win
+
+let initializeApp = new InitializeApp();
 
 /**
  * Funkcja tworząca okno programu
  */
 function createWindow() {
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: initializeApp.initialData.windowWidth,
+    height: initializeApp.initialData.windowHeight,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -28,6 +32,12 @@ function createWindow() {
   win.loadFile("index.html");
 
   Messages.initMessages(win);
+
+  win.on("resize", (event) => {
+    let size = win.getSize()
+    initializeApp.initialData.windowWidth = size[0];
+    initializeApp.initialData.windowHeight = size[1];
+  })
 
   /**
    * Tworzenie menu
@@ -50,6 +60,7 @@ app.whenReady().then(createWindow);
  * żywot programu
  */
 app.on("window-all-closed", () => {
+  initializeApp.save();
   if (process.platform !== "darwin") {
     app.quit();
   }
