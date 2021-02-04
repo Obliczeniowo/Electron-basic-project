@@ -23,6 +23,7 @@ function createWindow() {
     height: initializeApp.initialData.windowHeight,
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true
     },
   });
 

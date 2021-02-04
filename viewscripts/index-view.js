@@ -3,9 +3,13 @@
  */
 const ipcRenderer = require("electron").ipcRenderer;
 
+const electron = require("electron");
+
 window.addEventListener("load", () => {
   const okButton = document.querySelector("#ok");
   const msgInput = document.querySelector("input[type='text']");
+  const obliczeniowoButton = document.querySelector("#show-brand-new-widnow");
+  const newWindow = document.querySelector("#new-window");
 
   okButton.addEventListener("click", () => {
     const message = msgInput.value;
@@ -24,5 +28,23 @@ window.addEventListener("load", () => {
       ipcRenderer.send("electron-log-message", `Message: ${message}`);
       msgInput.value = "";
     }
+  });
+
+  obliczeniowoButton.addEventListener("click", () => {
+    window.open("https://obliczeniowo.com.pl", "_blank", "nodeIntegration=no");
+  });
+
+  newWindow.addEventListener("click", () => {
+    const BrowserWindow = electron.remote.BrowserWindow;
+    const win = new BrowserWindow({
+      parent: electron.remote.getCurrentWindow(),
+      width: 800,
+      height: 700,
+      modal: true,
+      webPreferences: {
+        nodeIntegration: false
+      }
+    })
+    win.loadFile('./new-view.html');
   });
 });
