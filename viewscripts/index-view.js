@@ -31,11 +31,18 @@ window.addEventListener("load", () => {
   });
 
   obliczeniowoButton.addEventListener("click", () => {
+    /**
+     * Otwieranie okna i załadowanie strony obliczeniowo.com.pl
+     */
     window.open("https://obliczeniowo.com.pl", "_blank", "nodeIntegration=no");
   });
 
   newWindow.addEventListener("click", () => {
     const BrowserWindow = electron.remote.BrowserWindow;
+
+    /**
+     * Tworzenie nowego okna z widoku
+     */
     const win = new BrowserWindow({
       parent: electron.remote.getCurrentWindow(),
       width: 800,
