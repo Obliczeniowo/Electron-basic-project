@@ -1,7 +1,7 @@
 /** importowanie instanji aplikacji i klasy BrowserWindow umożliwiającej
  *  tworzenie nowego okna programu oraz obiektu menu
  */
-const { app, BrowserWindow, Menu } = require("electron");
+const { app, BrowserWindow, Menu, ipcMain } = require("electron");
 
 const { Messages } = require("./electronscripts/messages");
 
@@ -107,7 +107,7 @@ if (process.env.NODE_ENV !== "production") {
         label: "Toogle dev tools",
         accelerator: process.platform === "darwin" ? "Command+I" : "Ctrl+I",
         click(item, focusedWindow) {
-          win.webContents.openDevTools();
+          focusedWindow.webContents.openDevTools();
         },
       },
     ],

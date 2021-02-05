@@ -5,6 +5,8 @@ const ipcRenderer = require("electron").ipcRenderer;
 
 const electron = require("electron");
 
+let newViewWindow = undefined;
+
 window.addEventListener("load", () => {
   const okButton = document.querySelector("#ok");
   const msgInput = document.querySelector("input[type='text']");
@@ -27,6 +29,10 @@ window.addEventListener("load", () => {
        */
       ipcRenderer.send("electron-log-message", `Message: ${message}`);
       msgInput.value = "";
+
+      if (newViewWindow !== undefined) {
+        newViewWindow.webContents.send("sending-maesage", message);
+      }
     }
   });
 
@@ -41,17 +47,28 @@ window.addEventListener("load", () => {
     const BrowserWindow = electron.remote.BrowserWindow;
 
     /**
+     * Gdy okno istnieje to wyślij do niego message
+     */
+    if (newViewWindow) {
+      return;
+    }
+    /**
      * Tworzenie nowego okna z widoku
      */
-    const win = new BrowserWindow({
+    newViewWindow = new BrowserWindow({
       parent: electron.remote.getCurrentWindow(),
       width: 800,
       height: 700,
-      modal: true,
+      modal: false,
       webPreferences: {
-        nodeIntegration: false
-      }
-    })
-    win.loadFile('./new-view.html');
+        nodeIntegration: true,
+        enableRemoteModule: true,
+      },
+    });
+    newViewWindow.loadFile("./new-view.html");
+
+    newViewWindow.on("closed", () => {
+      newViewWindow = undefined;
+    });
   });
 });

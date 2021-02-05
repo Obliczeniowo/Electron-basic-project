@@ -7,17 +7,19 @@
       http-equiv="Content-Security-Policy"
       content="script-src 'self' 'unsafe-inline';"
     />
-    <script src="./viewscripts/index-view.js"></script>
+
     <style>
-        .command-container {
-            display: flex;
-        }
-        .command-container input {
-            width: calc(100vw - 30px);
-        }
+      #messages p {
+        border-radius: 5px;
+        border: solid 1px black;
+        padding: 5px;
+      }
     </style>
+
+    <script src="viewscripts/new-view.js"></script>
   </head>
   <body style="background: white">
     <h2>A brand, brand new window!</h2>
+    <div id="messages"></div>
   </body>
 </html>
