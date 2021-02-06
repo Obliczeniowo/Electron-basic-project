@@ -7,12 +7,24 @@ const { Messages } = require("./electronscripts/messages");
 
 const { InitializeApp } = require("./electronscripts/initialize");
 
+const { Routing, RouteItem } = require("./electronscripts/routing");
+
 // ustawia produkcyjną wersję
 process.env.NODE_ENV = "dev"; // 'production';
 
 let win
 
+let winRouting = new Routing(win , [])
+
 let initializeApp = new InitializeApp();
+
+ipcMain.on(
+  'change-win-route',
+  (e, routePath) => {
+    console.log(routePath);
+    winRouting.changeRoute(routePath)
+  }
+)
 
 /**
  * Funkcja tworząca okno programu
@@ -31,6 +43,13 @@ function createWindow() {
    * Tutaj wskazywany jest plik widoku okna
    */
   win.loadFile("index.html");
+
+  winRouting = new Routing(win , [
+    new RouteItem('home', null, './index.html', [
+      new RouteItem('subRouting', null, './sub-routing-view.html')
+    ]),
+    new RouteItem('trussCalculator', null, './truss-calculator.html', [])
+  ])
 
   Messages.initMessages(win);
 

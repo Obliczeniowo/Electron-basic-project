@@ -12,6 +12,8 @@ window.addEventListener("load", () => {
   const msgInput = document.querySelector("input[type='text']");
   const obliczeniowoButton = document.querySelector("#show-brand-new-widnow");
   const newWindow = document.querySelector("#new-window");
+  const trussCalculator = document.querySelector("#truss-calculator");
+  const subuRouting = document.querySelector("#sub-routing");
 
   okButton.addEventListener("click", () => {
     const message = msgInput.value;
@@ -65,10 +67,33 @@ window.addEventListener("load", () => {
         enableRemoteModule: true,
       },
     });
+
     newViewWindow.loadFile("./new-view.html");
 
     newViewWindow.on("closed", () => {
       newViewWindow = undefined;
     });
   });
+
+  trussCalculator.addEventListener(
+    "click",
+    () => {
+      if (newViewWindow) {
+        newViewWindow.close()
+        newViewWindow = null;
+      }
+      ipcRenderer.send('change-win-route', 'trussCalculator');
+    }
+  )
+
+  subuRouting.addEventListener(
+    "click",
+    () => {
+      if (newViewWindow) {
+        newViewWindow.close()
+        newViewWindow = null;
+      }
+      ipcRenderer.send('change-win-route', 'home/subRouting');
+    }
+  )
 });
